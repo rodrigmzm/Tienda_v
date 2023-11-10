@@ -25,7 +25,6 @@ public class ProductoController {
     
     @GetMapping("/listado")
     public String listado(Model model) {
-       
         var productos = productoService.getProductos(false);
         model.addAttribute("productos",productos);
         model.addAttribute("totalProductos",productos.size());
@@ -43,6 +42,8 @@ public class ProductoController {
     
     @GetMapping("/modificar/{idProducto}")
     public String modificar(Producto producto, Model model) {
+        var categorias = categoriaService.getCategorias(false);
+        model.addAttribute("categorias", categorias);
         producto = productoService.getProducto(producto);
         model.addAttribute("producto",producto);
         return "/producto/modifica";
